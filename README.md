@@ -21,4 +21,5 @@ Dit mechanisme heb ik nagemaakt waardoor er exact dezelfde hash uitkomt.
 Voor de Jumbo maak ik ook gebruik van de achterliggende REST-API die uit de android app komt. Er word niet gebruikt gemaakt van een speciale veiligheidsmechanisme. Wel word er een X-jumbo-token gebruikt, dit is alleen van toepassing als je de prijs van een speciale winkel wil zien of een winkelmandje wil samenstellen.
 
 Deze X-jumbo-token heb ik geimplementeerd zodat je kan switchen tussen lokale winkels. Tijdens het experimenteren kwam ik er namelijk achter dat alle jumbo winkels een bepaalde categorie bezitten van J1-J5
+
 ```mobileapi.jumbo.com```
