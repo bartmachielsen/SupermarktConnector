@@ -2,7 +2,7 @@
 Een Python project voor het ophalen van data vanuit de Albert Heijn en Jumbo
 
 ## Albert Heijn
-Voor de AH word gebruikt gemaakt van een achterliggende REST-API die ik gevonden heb tijdens het analyzeren van de android app. Deze REST-API heeft wel verschillende veiligheidsmechanisme's ingebouwd om gebruik van derde te voorkomen.
+Voor de AH word gebruikt gemaakt van een achterliggende REST-API die ik gevonden heb tijdens het analyzeren van het dataverkeer van de android app. Deze REST-API heeft wel verschillende veiligheidsmechanisme's ingebouwd om gebruik van derde te voorkomen.
 
 ```ms.ah.nl/rest/ah/```
 
