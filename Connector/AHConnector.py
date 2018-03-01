@@ -99,7 +99,7 @@ class AHConnector(Connector):
             "User-Agent": "android/5.2.1 Model/phone Android/6.0.1-API23 Member/"+username, # header needed
             "Authorization":
                 "Basic "+
-                base64.b64encode(bytes("{}:{}".format(username, password))).decode("UTF-8"), # header needed
+                base64.b64encode(bytes("{}:{}".format(username, password), "utf-8")).decode("UTF-8"), # header needed
             "Host": "ms.ah.nl", # header needed
             # "Connection": "Keep-Alive", # header not needed
             # "Accept-Encoding": "gzip"   # header not needed
@@ -111,7 +111,7 @@ class AHConnector(Connector):
             if succes(result.status_code): # check if not failed!
                 return result.json()
         except Exception as e:
-            print e
+            print(e)
 
 
     def get_categorys(self, head_category=None):

@@ -1,6 +1,12 @@
 # SupermarktConnector
 Een Python project voor het ophalen van data vanuit de Albert Heijn en Jumbo
 
+This connector makes use of the requests library
+`python -m pip install requests`
+
+### See Example.py for an simple example and generate output
+
+
 ## Albert Heijn
 Voor de AH word gebruikt gemaakt van een achterliggende REST-API die ik gevonden heb tijdens het analyzeren van het dataverkeer van de android app. Deze REST-API heeft wel verschillende veiligheidsmechanisme's ingebouwd om gebruik van derde te voorkomen.
 
