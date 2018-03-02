@@ -18,20 +18,20 @@ The AH makes use of an backend Rest-API that uses multiple security techniques t
 
 The location of the backend:    [```ms.ah.nl/rest/ah/```](ms.ah.nl/rest/ah)
 
-### Basic authentication
-Voor gebruik moet er eerst een wachtwoord aangevraagd worden, dit wachtwoord kan dan gebruikt worden om gegevens zoals gebruikersnaam te verkrijgen. Bij alle requests moet dit wachtwoord en gebruikersnaam meegestuurd worden. 
-Ook moet er een gehashte Base64 authenticatie meegestuurd worden.
-
-### X-digest
-De X-digest is een gehashte waarde door middel van SHA1 die gebruikt word om te controleren of de gegenereerde X-Digest ook daadwerkelijk bij de gevraagde url met parameters hoort. Deze word gemaakt met de data:
-
-URL MET PARAMETERS, Gebruikersnaam, de gegeven body (maximaal 1000 bytes), de geheime digest code die in de android app verwerkt is.
-
-Dit mechanisme heb ik nagemaakt waardoor er exact dezelfde hash uitkomt.
+- <b>Basic authentication</b>
+    <i>Any request like requesting all the products of an given category should contain an authentication-key so that the backend knows that the user is valid. This password should be requested using an hashed version of Base64 like basic authentication.</i>
+- <b>X-Digest</b>
+    <i>This X-Digest is an hashed value that uses SHA1 to check if the request is valid and made by the android app. The logic behind this hash is:</i>
+    `X_DIGEST = URL + PARAMETERS + USERNAME + POST_BODY (Max 1000 bytes) + SECRET_PASSWORD`
+    <i>This mechanism is copied into this application</i>
 
 ## Jumbo Supermarkten
-Voor de Jumbo maak ik ook gebruik van de achterliggende REST-API die uit de android app komt. Er word niet gebruikt gemaakt van een speciale veiligheidsmechanisme. Wel word er een X-jumbo-token gebruikt, dit is alleen van toepassing als je de prijs van een speciale winkel wil zien of een winkelmandje wil samenstellen.
+The jumbo also has an app that makes it possible to search products. By looking at the data communication it is clearly visible that this app does not use any security mechanism. The only key or token that is used is used for setting an given supermarket as the shop that you want to order from. By implementing this <b>X-jumbo-token</b> it is possible to switch between different stores and determine the price difference between certain stores.
 
-Deze X-jumbo-token heb ik geimplementeerd zodat je kan switchen tussen lokale winkels. Tijdens het experimenteren kwam ik er namelijk achter dat alle jumbo winkels een bepaalde categorie bezitten van J1-J5
+The backend location:   ```mobileapi.jumbo.com```
 
-```mobileapi.jumbo.com```
+All the stores of the jumbo are sorted in 5 different categories, de logic behind which store is more expensive is difficult because it is dependant of which products you are looking for.
+
+<img src="/jumbo-prices.jpg">
+
+I created an [interactive map](https://www.google.com/maps/d/u/0/edit?mid=1uPq5t6Ymcjs9TbrNbyAl5uS08sY&ll=51.93466534760809%2C6.304439426712179&z=8) which sorts all the stores by category.
