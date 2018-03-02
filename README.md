@@ -1,16 +1,22 @@
 # SupermarktConnector
-Een Python project voor het ophalen van data vanuit de Albert Heijn en Jumbo
+An python project for getting products and categories from some major sumpermarkets in the Netherlands.
 
-This connector makes use of the requests library
-`python -m pip install requests`
+See [example.py](https://github.com/bartmachielsen/SupermarktConnector/blob/master/example.py) for an simple example.
 
-### See Example.py for an simple example and generate output
+### REQUIRED
+This application is written for Python 3 (But should be compatible with Python 2.7)
 
+#### Requests
+To keep the http-requests simple and not version dependant the requests library is used. Make sure to install this library before running the example: `python -m install `
+
+
+## Method
+For getting the products from the supermarkets the data of the mobile app is analyzed. This app makes use of the public api behind those apps.
 
 ## Albert Heijn
-Voor de AH word gebruikt gemaakt van een achterliggende REST-API die ik gevonden heb tijdens het analyzeren van het dataverkeer van de android app. Deze REST-API heeft wel verschillende veiligheidsmechanisme's ingebouwd om gebruik van derde te voorkomen.
+The AH makes use of an backend Rest-API that uses multiple security techniques to limit the data to only app users.
 
-```ms.ah.nl/rest/ah/```
+The location of the backend:    [```ms.ah.nl/rest/ah/```](ms.ah.nl/rest/ah)
 
 ### Basic authentication
 Voor gebruik moet er eerst een wachtwoord aangevraagd worden, dit wachtwoord kan dan gebruikt worden om gegevens zoals gebruikersnaam te verkrijgen. Bij alle requests moet dit wachtwoord en gebruikersnaam meegestuurd worden. 
