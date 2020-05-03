@@ -5,10 +5,10 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name='supermarktconnector',
-    version='0.2',
+    version='0.3',
     author="Bart Machielsen",
     author_email="bartmachielsen@gmail.com",
-    description="Collecting product information from Dutch supermarkets",
+    description="Collecting product information from Dutch supermarkets: Albert Heijn and Jumbo",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/bartmachielsen/SupermarktConnector",

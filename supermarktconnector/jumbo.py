@@ -12,7 +12,7 @@ HEADERS = {
 
 
 class JumboConnector:
-    def search_products(self, query=None, page=0, size=10_000):
+    def search_products(self, query=None, page=0, size=1_000):
         if (page + 1 * size) > 10_000:
             raise PaginationLimitReached('Pagination limit on Jumbo connector of 10.0000')
 
@@ -30,7 +30,7 @@ class JumboConnector:
         :param kwargs: See params of 'search_products' method, note that size should not be altered to optimize/limit pages
         :return: generator yielding products
         """
-        size = kwargs.pop('size', None) or 10_000
+        size = kwargs.pop('size', None) or 1_000
         response = self.search_products(page=0, size=size, **kwargs)
         yield from response['products']['data']
 
