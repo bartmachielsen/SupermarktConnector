@@ -1,0 +1,16 @@
+name: Publish
+on:
+  push:
+    branches:
+      - master
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pull repo
+        uses: actions/checkout@master
+      - name: Upload package
+        uses: onichandame/pip-upload-action@master
+        with:
+          username: '__token__'
+          password: ${{ secrets.PIP_PASSWORD }}

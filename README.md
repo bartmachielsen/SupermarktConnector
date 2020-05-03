@@ -1,4 +1,4 @@
-# SupermarktConnector
+# SupermarketConnector
 
 An python project for getting products and categories from some major sumpermarkets in the Netherlands.
 
