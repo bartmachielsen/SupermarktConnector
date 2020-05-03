@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name='supermarktconnector',
-    version='0.1',
+    version='0.2',
     author="Bart Machielsen",
     author_email="bartmachielsen@gmail.com",
     description="Collecting product information from Dutch supermarkets",

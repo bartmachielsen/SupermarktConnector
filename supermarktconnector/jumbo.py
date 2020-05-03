@@ -1,6 +1,6 @@
 import requests
 from math import ceil
-from connectors.errors import PaginationLimitReached
+from supermarktconnector.errors import PaginationLimitReached
 import logging
 logger = logging.getLogger('supermarkt_connector')
 logger.setLevel(logging.INFO)
