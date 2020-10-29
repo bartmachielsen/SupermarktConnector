@@ -6,8 +6,7 @@ logger = logging.getLogger('supermarkt_connector')
 logger.setLevel(logging.INFO)
 
 HEADERS = {
-    'User-Agent': 'android/6.29.3 Model/phone Android/7.0-API24',
-    'Host': 'ms.ah.nl',
+    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:81.0) Gecko/20100101 Firefox/81.0'
 }
 
 
@@ -18,6 +17,7 @@ class JumboConnector:
 
         response = requests.get(
             'https://mobileapi.jumbo.com/v9/search',
+            headers=HEADERS,
             params={"offset": page * size, "limit": size, "q": query},
         )
         if not response.ok:
@@ -45,6 +45,7 @@ class JumboConnector:
     def get_product_by_barcode(self, barcode):
         response = requests.get(
             'https://mobileapi.jumbo.com/v9/search',
+            headers=HEADERS,
             params={"q": barcode},
         )
         if not response.ok:
@@ -60,7 +61,8 @@ class JumboConnector:
         """
         product_id = product if not isinstance(product, dict) else product['id']
         response = requests.get(
-            'https://mobileapi.jumbo.com/v9/products/{}'.format(product_id)
+            'https://mobileapi.jumbo.com/v9/products/{}'.format(product_id),
+            headers=HEADERS
         )
         if not response.ok:
             response.raise_for_status()
@@ -69,6 +71,7 @@ class JumboConnector:
     def get_categories(self):
         response = requests.get(
             'https://mobileapi.jumbo.com/v9/categories',
+            headers=HEADERS
         )
         if not response.ok:
             response.raise_for_status()
@@ -78,6 +81,7 @@ class JumboConnector:
         category_id = category if not isinstance(category, dict) else category['id']
         response = requests.get(
             'https://mobileapi.jumbo.com/v9/categories',
+            headers=HEADERS,
             params={"id": category_id}
         )
         if not response.ok:
@@ -90,6 +94,6 @@ if __name__ == '__main__':
     connector = JumboConnector()
     # pprint(connector.search_products(query='Smint'))
     # pprint(len(list(connector.search_all_products())))
-    pprint(connector.get_product_details(connector.get_product_by_barcode('8410031965902')))
-    # pprint(connector.get_categories())
+    # pprint(connector.get_product_details(connector.get_product_by_barcode('8410031965902')))
+    pprint(connector.get_categories())
     # pprint(connector.get_sub_categories(connector.get_categories()[0]))
