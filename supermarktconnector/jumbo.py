@@ -88,6 +88,44 @@ class JumboConnector:
             response.raise_for_status()
         return response.json()['categories']['data']
 
+    def get_all_stores(self):
+        response = requests.get(
+            'https://mobileapi.jumbo.com/v9/stores',
+            headers=HEADERS
+        )
+        if not response.ok:
+            response.raise_for_status()
+        return response.json()['stores']['data']
+
+    def get_store(self, store):
+        store_id = store if not isinstance(store, dict) else store['id']
+        response = requests.get(
+            'https://mobileapi.jumbo.com/v9/stores/{}'.format(store_id),
+            headers=HEADERS
+        )
+        if not response.ok:
+            response.raise_for_status()
+        return response.json()['store']['data']
+
+    def get_all_promotions(self):
+        response = requests.get(
+            'https://mobileapi.jumbo.com/v9/promotion-overview',
+            headers=HEADERS
+        )
+        if not response.ok:
+            response.raise_for_status()
+        return response.json()['tabs']
+
+    def get_promotions_store(self, store):
+        store_id = store if not isinstance(store, dict) else store['id']
+        response = requests.get(
+            'https://mobileapi.jumbo.com/v9/promotion-overview',
+            headers=HEADERS,
+            params={"store_id": store_id}
+        )
+        if not response.ok:
+            response.raise_for_status()
+        return response.json()['tabs']
 
 if __name__ == '__main__':
     from pprint import pprint
