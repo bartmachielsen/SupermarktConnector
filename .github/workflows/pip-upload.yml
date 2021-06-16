@@ -10,7 +10,7 @@ jobs:
       - name: Pull repo
         uses: actions/checkout@master
       - name: Upload package
-        uses: onichandame/pip-upload-action@master
+        uses: bartmachielsen/pip-upload-action@master
         with:
           username: '__token__'
           password: ${{ secrets.PIP_PASSWORD }}
