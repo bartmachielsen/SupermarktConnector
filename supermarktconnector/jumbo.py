@@ -11,9 +11,9 @@ HEADERS = {
 
 
 class JumboConnector:
-    def search_products(self, query=None, page=0, size=1_000):
-        if (page + 1 * size) > 10_000:
-            raise PaginationLimitReached('Pagination limit on Jumbo connector of 10.0000')
+    def search_products(self, query=None, page=0, size=30):
+        if (page + 1 * size) > 30:
+            raise PaginationLimitReached('Pagination limit on Jumbo connector of 30')
 
         response = requests.get(
             'https://mobileapi.jumbo.com/v9/search',
@@ -30,7 +30,7 @@ class JumboConnector:
         :param kwargs: See params of 'search_products' method, note that size should not be altered to optimize/limit pages
         :return: generator yielding products
         """
-        size = kwargs.pop('size', None) or 1_000
+        size = kwargs.pop('size', None) or 30
         response = self.search_products(page=0, size=size, **kwargs)
         yield from response['products']['data']
 
@@ -93,7 +93,7 @@ if __name__ == '__main__':
     from pprint import pprint
     connector = JumboConnector()
     # pprint(connector.search_products(query='Smint'))
-    # pprint(len(list(connector.search_all_products())))
+    pprint(len(list(connector.search_all_products(query='Smint'))))
     # pprint(connector.get_product_details(connector.get_product_by_barcode('8410031965902')))
-    pprint(connector.get_categories())
+    # pprint(connector.get_categories())
     # pprint(connector.get_sub_categories(connector.get_categories()[0]))
