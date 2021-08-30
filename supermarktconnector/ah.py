@@ -61,7 +61,7 @@ class AHConnector:
         """
         product_id = product if not isinstance(product, dict) else product['webshopId']
         response = requests.get(
-            'https://ms.ah.nl/mobile-services/product/detail/v3/fir/{}'.format(product_id),
+            'https://ms.ah.nl/mobile-services/product/detail/v4/fir/{}'.format(product_id),
             headers={**HEADERS, "Authorization": "Bearer {}".format(self._access_token.get('access_token'))}
         )
         if not response.ok:
