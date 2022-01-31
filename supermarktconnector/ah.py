@@ -1,4 +1,5 @@
 import requests
+from pprint import pprint
 
 HEADERS = {
     'Host': 'api.ah.nl',
@@ -64,7 +65,7 @@ class AHConnector:
         """
         product_id = product if not isinstance(product, dict) else product['webshopId']
         response = requests.get(
-            'https://api.ah.nl/mobile-services/product/detail/v3/fir/{}'.format(product_id),
+            'https://api.ah.nl/mobile-services/product/detail/v4/fir/{}'.format(product_id),
             headers={**HEADERS, "Authorization": "Bearer {}".format(self._access_token.get('access_token'))}
         )
         if not response.ok:
@@ -97,4 +98,8 @@ if __name__ == '__main__':
     # print(len(list(connector.search_all_products(query='smint'))))
     # print(connector.get_product_details(connector.get_product_by_barcode('8410031965902')))
     # print(connector.get_categories())
-    print(connector.get_sub_categories(connector.get_categories()[0]))
+    # print(connector.get_sub_categories(connector.get_categories()[0]))
+
+    # print(connector.search_products('Smint')['products'])
+
+    pprint(connector.get_product_details(177119))
