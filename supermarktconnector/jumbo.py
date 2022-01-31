@@ -127,6 +127,7 @@ class JumboConnector:
             response.raise_for_status()
         return response.json()['tabs']
 
+
 if __name__ == '__main__':
     from pprint import pprint
     connector = JumboConnector()

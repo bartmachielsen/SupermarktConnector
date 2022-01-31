@@ -1,8 +1,11 @@
 import requests
 
 HEADERS = {
-    'User-Agent': 'android/6.29.3 Model/phone Android/7.0-API24',
-    'Host': 'ms.ah.nl',
+    'Host': 'api.ah.nl',
+    'x-dynatrace': 'MT_3_4_772337796_1_fae7f753-3422-4a18-83c1-b8e8d21caace_0_1589_109',
+    'x-application': 'AHWEBSHOP',
+    'user-agent': 'Appie/8.8.2 Model/phone Android/7.0-API24',
+    'content-type': 'application/json; charset=UTF-8',
 }
 
 
@@ -10,9 +13,9 @@ class AHConnector:
     @staticmethod
     def get_anonymous_access_token():
         response = requests.post(
-            'https://ms.ah.nl/create-anonymous-member-token',
+            'https://api.ah.nl/mobile-auth/v1/auth/token/anonymous',
             headers=HEADERS,
-            params={"client": "appie-anonymous"}
+            json={"clientId": "appie"}
         )
         if not response.ok:
             response.raise_for_status()
@@ -23,7 +26,7 @@ class AHConnector:
 
     def search_products(self, query=None, page=0, size=750, sort='RELEVANCE'):
         response = requests.get(
-            'https://ms.ah.nl/mobile-services/product/search/v2?sortOn=RELEVANCE',
+            'https://api.ah.nl/mobile-services/product/search/v2?sortOn=RELEVANCE',
             params={"sortOn": sort, "page": page, "size": size, "query": query},
             headers={**HEADERS, "Authorization": "Bearer {}".format(self._access_token.get('access_token'))}
         )
@@ -46,7 +49,7 @@ class AHConnector:
 
     def get_product_by_barcode(self, barcode):
         response = requests.get(
-            'https://ms.ah.nl/mobile-services/product/search/v1/gtin/{}'.format(barcode),
+            'https://api.ah.nl/mobile-services/product/search/v1/gtin/{}'.format(barcode),
             headers={**HEADERS, "Authorization": "Bearer {}".format(self._access_token.get('access_token'))}
         )
         if not response.ok:
@@ -61,7 +64,7 @@ class AHConnector:
         """
         product_id = product if not isinstance(product, dict) else product['webshopId']
         response = requests.get(
-            'https://ms.ah.nl/mobile-services/product/detail/v3/fir/{}'.format(product_id),
+            'https://api.ah.nl/mobile-services/product/detail/v3/fir/{}'.format(product_id),
             headers={**HEADERS, "Authorization": "Bearer {}".format(self._access_token.get('access_token'))}
         )
         if not response.ok:
@@ -70,7 +73,7 @@ class AHConnector:
 
     def get_categories(self):
         response = requests.get(
-            'https://ms.ah.nl/mobile-services/v1/product-shelves/categories',
+            'https://api.ah.nl/mobile-services/v1/product-shelves/categories',
             headers={**HEADERS, "Authorization": "Bearer {}".format(self._access_token.get('access_token'))}
         )
         if not response.ok:
@@ -80,7 +83,7 @@ class AHConnector:
     def get_sub_categories(self, category):
         category_id = category if not isinstance(category, dict) else category['id']
         response = requests.get(
-            'https://ms.ah.nl/mobile-services/v1/product-shelves/categories/{}/sub-categories'.format(category_id),
+            'https://api.ah.nl/mobile-services/v1/product-shelves/categories/{}/sub-categories'.format(category_id),
             headers={**HEADERS, "Authorization": "Bearer {}".format(self._access_token.get('access_token'))}
         )
         if not response.ok:
