@@ -11,12 +11,13 @@ HEADERS = {
 
 
 class JumboConnector:
+
     def search_products(self, query=None, page=0, size=30):
         if (page + 1 * size) > 30:
             raise PaginationLimitReached('Pagination limit on Jumbo connector of 30')
 
         response = requests.get(
-            'https://mobileapi.jumbo.com/v12/search',
+            'https://mobileapi.jumbo.com/v16/search',
             headers=HEADERS,
             params={"offset": page * size, "limit": size, "q": query},
         )
@@ -44,7 +45,7 @@ class JumboConnector:
 
     def get_product_by_barcode(self, barcode):
         response = requests.get(
-            'https://mobileapi.jumbo.com/v12/search',
+            'https://mobileapi.jumbo.com/v16/search',
             headers=HEADERS,
             params={"q": barcode},
         )
@@ -61,7 +62,7 @@ class JumboConnector:
         """
         product_id = product if not isinstance(product, dict) else product['id']
         response = requests.get(
-            'https://mobileapi.jumbo.com/v12/products/{}'.format(product_id),
+            'https://mobileapi.jumbo.com/v16/products/{}'.format(product_id),
             headers=HEADERS
         )
         if not response.ok:
@@ -70,7 +71,7 @@ class JumboConnector:
 
     def get_categories(self):
         response = requests.get(
-            'https://mobileapi.jumbo.com/v12/categories',
+            'https://mobileapi.jumbo.com/v16/categories',
             headers=HEADERS
         )
         if not response.ok:
@@ -80,7 +81,7 @@ class JumboConnector:
     def get_sub_categories(self, category):
         category_id = category if not isinstance(category, dict) else category['id']
         response = requests.get(
-            'https://mobileapi.jumbo.com/v12/categories',
+            'https://mobileapi.jumbo.com/v16/categories',
             headers=HEADERS,
             params={"id": category_id}
         )
@@ -90,7 +91,7 @@ class JumboConnector:
 
     def get_all_stores(self):
         response = requests.get(
-            'https://mobileapi.jumbo.com/v12/stores',
+            'https://mobileapi.jumbo.com/v16/stores',
             headers=HEADERS
         )
         if not response.ok:
@@ -100,7 +101,7 @@ class JumboConnector:
     def get_store(self, store):
         store_id = store if not isinstance(store, dict) else store['id']
         response = requests.get(
-            'https://mobileapi.jumbo.com/v12/stores/{}'.format(store_id),
+            'https://mobileapi.jumbo.com/v16/stores/{}'.format(store_id),
             headers=HEADERS
         )
         if not response.ok:
@@ -109,7 +110,7 @@ class JumboConnector:
 
     def get_all_promotions(self):
         response = requests.get(
-            'https://mobileapi.jumbo.com/v12/promotion-overview',
+            'https://mobileapi.jumbo.com/v16/promotion-overview',
             headers=HEADERS
         )
         if not response.ok:
@@ -119,7 +120,7 @@ class JumboConnector:
     def get_promotions_store(self, store):
         store_id = store if not isinstance(store, dict) else store['id']
         response = requests.get(
-            'https://mobileapi.jumbo.com/v12/promotion-overview',
+            'https://mobileapi.jumbo.com/v16/promotion-overview',
             headers=HEADERS,
             params={"store_id": store_id}
         )
