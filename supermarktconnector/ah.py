@@ -93,22 +93,26 @@ class AHConnector:
         return response.json()
 
     
-    def get_product_category_details(self, product_details):
+    def get_product_category_details(self, product_details, brand=None):
         """
         Get advanced details of the categories of a product
         :param product_details: Product details object (dict) as returned by get_product_details or the taxonomy ID
+        :param brand: Brand abbreviation of the product (str). Only needed if passing the taxonomy ID directly instead of the product details object for product_details
         :return: dict containing category information
         """
-        if not isinstance(product_details, dict):
+        if not isinstance(product_details, dict) and brand is not None:
             taxonomy_id = product_details
         else:
             taxonomy_id = product_details['productCard']['subCategoryId']
+            brand = product_details['productCard']['brand']
         response = requests.get(
-            f'https://www.ah.nl/zoeken/api/products/taxonomy-brand?taxonomyId={taxonomy_id}'
+            'https://www.ah.nl/zoeken/api/products/taxonomy-brand?brand={}&taxonomyId={}'.format(brand, taxonomy_id),
+            headers={**HEADERS}
         )
         if not response.ok:
             response.raise_for_status()
         return response.json()
+    
 
     def get_bonus_periods(self):
         """
