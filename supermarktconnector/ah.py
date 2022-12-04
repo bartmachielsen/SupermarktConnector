@@ -10,6 +10,23 @@ HEADERS = {
     'content-type': 'application/json; charset=UTF-8',
 }
 
+HEADERS_WEB = {
+    'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36 Edg/109.0.0.0',
+    'content-type': 'application/json',
+    'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+    'accept-encoding': 'gzip, deflate, br',
+    'accept-language': 'en-US,en;q=0.9,nl;q=0.8',
+    'dnt': '1',
+    'sec-fetch-dest': 'document',
+    'sec-fetch-mode': 'navigate',
+    'sec-fetch-site': 'none',
+    'sec-fetch-ua': '"Not_A Brand";v="99", "Microsoft Edge";v="109", "Chromium";v="109"',
+    'sec-fetch-ua-mobile': '?0',
+    'upgrade-insecure-requests': '1',
+    'sec-ch-ua-platform': '"Windows"',
+    'sec-fetch-user': '?1',
+}
+
 
 class AHConnector:
     @staticmethod
@@ -107,7 +124,7 @@ class AHConnector:
             brand = product_details['productCard']['brand']
         response = requests.get(
             'https://www.ah.nl/zoeken/api/products/taxonomy-brand?brand={}&taxonomyId={}'.format(brand, taxonomy_id),
-            headers={**HEADERS}
+            headers={**HEADERS_WEB}
         )
         if not response.ok:
             response.raise_for_status()
