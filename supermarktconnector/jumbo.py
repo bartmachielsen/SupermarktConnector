@@ -11,7 +11,7 @@ HEADERS = {
 
 
 class JumboConnector:
-    jumbo_api_version = "v15"
+    jumbo_api_version = "v17"
 
     def search_products(self, query=None, page=0, size=30):
         if (page + 1 * size) > 30:
